@@ -224,12 +224,14 @@ class ControlCharacteristic:
         rv.action = reader.read_u8()
         rv.payload_mode = reader.read_u8()
 
+        print("ControlCharacteristic", rv.Type, rv.action, rv.payload_mode)
+
         return rv
 
     # parse bytes as characteristic data
     def from_bytes(bites):
         reader = _ResponseReader(bites)
-        return ControlCharacteristic.read(reader)
+        return ControlCharacteristic._from_reader(reader)
 
     # convert characteristic data back to bytes
     def to_bytes(self):
